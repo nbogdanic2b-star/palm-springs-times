@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Palm Springs Times – Noticias Locales</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #111010;
+    --paper: #f5f0e8;
+    --cream: #ede8dc;
+    --red: #b01a1a;
+    --gold: #c4952a;
+    --mid: #5a5245;
+    --rule: #2a2420;
+    --col-width: 720px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    background: var(--rule);
+    color: #ccc;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 5px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .topbar strong { color: #fff; }
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    text-align: center;
+    padding: 22px 32px 10px;
+    border-bottom: 3px solid var(--rule);
+    position: relative;
+  }
+  .masthead-kicker {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 6px;
+  }
+  .masthead h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 900;
+    letter-spacing: -.02em;
+    line-height: 1;
+    color: var(--rule);
+    text-transform: uppercase;
+  }
+  .masthead-sub {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-top: 6px;
+  }
+  .masthead-rule {
+    height: 1px;
+    background: var(--rule);
+    margin: 12px 0 0;
+  }
+
+  /* ── BREAKING BAND ── */
+  .breaking {
+    background: var(--red);
+    color: #fff;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 7px 32px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .breaking-label {
+    background: #fff;
+    color: var(--red);
+    padding: 2px 8px;
+    font-size: 10px;
+    white-space: nowrap;
+  }
+  .breaking-scroll {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  /* ── NAV TABS ── */
+  .navtabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--rule);
+    padding: 0 24px;
+    background: var(--cream);
+    overflow-x: auto;
+    flex-wrap: wrap;
+  }
+  .navtabs a {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--rule);
+    text-decoration: none;
+    padding: 10px 16px;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: border-color .2s, color .2s;
+  }
+  .navtabs a:hover, .navtabs a.active { border-bottom-color: var(--red); color: var(--red); }
+
+  /* ── LAYOUT ── */
+  .page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 0;
+    border-bottom: 2px solid var(--rule);
+    padding: 28px 0 24px;
+  }
+  .hero-main { padding-right: 28px; border-right: 1px solid #bbb; }
+  .hero-sidebar { padding-left: 24px; }
+
+  .section-label {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--red); opacity: .4; }
+
+  .hero-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 3.5vw, 44px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    color: var(--rule);
+  }
+  .hero-deck {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+  .hero-byline {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 11px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 16px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 5px 0;
+  }
+  .hero-byline strong { color: var(--rule); }
+
+  /* Fake fire photo */
+  .photo-block {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: linear-gradient(160deg,#1a0a00 0%,#5c1a00 30%,#c44000 60%,#ff8c00 80%,#ffd27a 100%);
+    position: relative;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+  .photo-block::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 60% 80%, rgba(255,140,0,.45) 0%, transparent 70%),
+                radial-gradient(ellipse at 30% 60%, rgba(200,60,0,.3) 0%, transparent 60%);
+    animation: flicker 2.5s infinite alternate;
+  }
+  @keyframes flicker {
+    0% { opacity: .8; }
+    50% { opacity: 1; }
+    100% { opacity: .7; }
+  }
+  .photo-caption {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 11px;
+    color: var(--mid);
+    font-style: italic;
+    margin-bottom: 16px;
+  }
+  .photo-caption strong { font-style: normal; font-weight: 700; color: var(--rule); }
+
+  .article-body p {
+    margin-bottom: 14px;
+    text-align: justify;
+    hyphens: auto;
+    font-size: 14.5px;
+    color: #1a1a1a;
+  }
+  .article-body p:first-child::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    font-weight: 900;
+    float: left;
+    line-height: .75;
+    margin: 4px 8px 0 0;
+    color: var(--rule);
+  }
+
+  /* pull quote */
+  .pull-quote {
+    border-left: 4px solid var(--red);
+    padding: 8px 16px;
+    margin: 18px 0;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--rule);
+    line-height: 1.4;
+  }
+  .pull-quote cite {
+    display: block;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 10px;
+    font-style: normal;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-top: 6px;
+  }
+
+  /* Sidebar boxes */
+  .sidebar-box {
+    border: 1px solid #bbb;
+    background: var(--cream);
+    padding: 14px;
+    margin-bottom: 18px;
+  }
+  .sidebar-box h3 {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #ccc;
+  }
+  .sidebar-box p { font-size: 13px; margin-bottom: 8px; color: #333; }
+  .sidebar-box ul { padding-left: 16px; }
+  .sidebar-box li { font-size: 13px; margin-bottom: 6px; color: #333; }
+
+  /* Cast tag */
+  .cast-tag {
+    display: inline-block;
+    background: var(--rule);
+    color: #fff;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+  .cast-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+  .cast-item { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px dotted #bbb; }
+  .cast-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  /* ── SECTION DIVIDERS ── */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 32px 0 20px;
+  }
+  .section-divider span {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    font-style: italic;
+    white-space: nowrap;
+    color: var(--rule);
+  }
+  .section-divider::before, .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: var(--rule);
+  }
+
+  /* ── STORY MAP (Story Builder) ── */
+  #story-map-container {
+    background: var(--cream);
+    border: 1px solid #bbb;
+    padding: 24px;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  #story-map-container img {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid var(--rule);
+  }
+
+  /* ── Q&A (Questions Maker) ── */
+  #qa-section {
+    border: 1px solid #bbb;
+    background: #fff;
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+  .qa-header {
+    background: var(--rule);
+    color: #fff;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .qa-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 700;
+  }
+  .qa-badge {
+    background: var(--red);
+    color: #fff;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+  }
+  .qa-item {
+    border-bottom: 1px solid #e0dbd0;
+    padding: 0;
+    overflow: hidden;
+    transition: background .2s;
+  }
+  .qa-item:last-child { border-bottom: none; }
+  .qa-q {
+    background: var(--cream);
+    padding: 14px 20px 14px 54px;
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--rule);
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .qa-q::before {
+    content: attr(data-n);
+    position: absolute;
+    left: 16px;
+    top: 14px;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--red);
+    width: 28px;
+    text-align: center;
+  }
+  .qa-toggle {
+    font-size: 18px;
+    color: var(--red);
+    flex-shrink: 0;
+    transition: transform .25s;
+    font-family: monospace;
+  }
+  .qa-q.open .qa-toggle { transform: rotate(45deg); }
+  .qa-a {
+    display: none;
+    padding: 12px 20px 14px 54px;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.6;
+    background: #fff;
+    border-left: 4px solid var(--gold);
+  }
+  .qa-a.open { display: block; }
+
+  #word-detective {
+    border: 1px solid #bbb;
+    margin-bottom: 40px;
+    overflow: hidden;
+  }
+  .wd-header {
+    background: var(--red);
+    color: #fff;
+    padding: 14px 20px;
+  }
+  .wd-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 700;
+  }
+  .wd-header p {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 12px;
+    opacity: .85;
+    margin-top: 2px;
+  }
+  .wd-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 0;
+  }
+  .wd-card {
+    padding: 16px;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+  }
+  .wd-card:nth-child(even) { background: var(--cream); }
+  .wd-word {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--rule);
+    margin-bottom: 2px;
+  }
+  .wd-pos {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .wd-def {
+    font-size: 13px;
+    color: #444;
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+  .wd-example {
+    font-size: 12px;
+    color: var(--mid);
+    font-style: italic;
+    border-left: 3px solid var(--gold);
+    padding-left: 8px;
+    line-height: 1.4;
+  }
+  .wd-example strong { font-style: normal; color: var(--rule); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 3px double var(--rule);
+    padding: 20px 32px;
+    text-align: center;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 11px;
+    color: var(--mid);
+    letter-spacing: .06em;
+  }
+  footer strong { color: var(--rule); font-family: 'Playfair Display', serif; font-size: 16px; letter-spacing: 0; }
+
+  /* ── ROLE BADGES ── */
+  .role-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--rule);
+    color: #fff;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    margin-bottom: 16px;
+  }
+  .role-badge .icon { font-size: 14px; }
+
+  @media (max-width: 700px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-main { padding-right: 0; border-right: none; border-bottom: 1px solid #bbb; padding-bottom: 20px; margin-bottom: 20px; }
+    .hero-sidebar { padding-left: 0; }
+    .topbar { font-size: 9px; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span><strong>Martes, 14 de agosto de 1990</strong> — Palm Springs, California</span>
+  <span>Vol. XLVII &nbsp;·&nbsp; No. 226 &nbsp;·&nbsp; Edición Local</span>
+  <span>Clima: <strong>112°F</strong> — Aviso de calor extremo</span>
+</div>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-kicker">Est. 1943 &nbsp;·&nbsp; Sirviendo al Valle de Coachella</div>
+  <h1>The Palm Springs Times</h1>
+  <div class="masthead-sub">Independiente · Valiente · Riguroso &nbsp;⬥&nbsp; 25 centavos</div>
+  <div class="masthead-rule"></div>
+</div>
+
+<!-- BREAKING BAND -->
+<div class="breaking">
+  <span class="breaking-label">⚑ Última Hora</span>
+  <span class="breaking-scroll">Dueño de restaurante hallado muerto en motel local &nbsp;·&nbsp; Policía investiga posible complot de incendio provocado &nbsp;·&nbsp; Patio del Ranchero Motel acordonado &nbsp;·&nbsp; Aún no hay cargos contra empleados</span>
+</div>
+
+<!-- NAV -->
+<nav class="navtabs">
+  <a href="#main-story" class="active">Portada</a>
+  <a href="#cast-section">Personajes y Escenario</a>
+  <a href="#story-map">Mapa de la Historia</a>
+  <a href="#qa-section">Preguntas de la Investigación</a>
+  <a href="#word-detective">Detective de Palabras</a>
+  <a href="index.html" style="background:var(--red);color:#fff;margin-left:auto;">Read in English</a>
+</nav>
+
+<div class="page">
+
+  <!-- ══════ HERO ══════ -->
+  <section class="hero" id="main-story">
+
+    <div class="hero-main">
+      <div class="section-label">Crimen y Tribunales</div>
+      <h2 class="hero-headline">Dueño de Restaurante de L.A. Muere en Calor Récord tras<br>Fallo de su Plan de Fraude al Seguro</h2>
+      <p class="hero-deck">Haldeman, de 48 años, dueño de "Haldeman's" en Los Ángeles, fue hallado muerto en el Ranchero Motel. Quedó atrapado en alquitrán fresco mientras esperaba una llamada para confirmar que no estaba en su restaurante durante un incendio.</p>
+      <div class="hero-byline">
+        Por <strong>Mary K. Calloway</strong>, Corresponsal de Crimen &nbsp;|&nbsp; Publicado el 14 de agosto de 1990, 6:00 AM &nbsp;|&nbsp; 
+        <em>Información contribuida por el Depto. de Policía de Palm Springs.</em>
+      </div>
+
+      <div class="photo-block" style="background: url('illustration.png') center/cover no-repeat; border: 1px solid var(--rule);"></div>
+      <p class="photo-caption"><strong>Ilustración:</strong> "El suelo no se sentía sólido bajo sus pies." La fatídica caminata de Haldeman por el patio del Ranchero Motel. — <em>PST Staff</em></p>
+
+      <div class="article-body">
+        <p>El dueño de un restaurante de Los Ángeles murió el domingo en Palm Springs. Viajó allí para crear una historia falsa y demostrar que estaba lejos mientras su negocio se quemaba. La policía dice que fue un plan muy malo que salió mal. Haldeman pensó que su plan para obtener dinero del seguro era perfecto, pero todo falló en el peor momento.</p>
+
+        <p>Según la policía, Haldeman condujo hasta el Ranchero Motel el viernes por la noche. Quería estar lejos de L.A. cuando su chef, José, encendiera por accidente las tuberías de gas que el propio Haldeman había dañado. Esperaba que el incendio destruyera el restaurante para cobrar el dinero del seguro. Le dijo a todos que su negocio ganaba mucho dinero, pero no era verdad.</p>
+
+        <div class="pull-quote">
+          "Fue muy cuidadoso con el libro de visitas. Escribió la fecha con mucha claridad. Me pareció extraño."
+          <cite>— Ricky, gerente del Ranchero Motel</cite>
+        </div>
+
+        <p>El plan empezó a fallar cuando Haldeman vio que las habitaciones del motel no tenían teléfono. Esto era un gran problema porque necesitaba recibir una llamada de su gerente, Larry Hyatt, para probar dónde estaba. El único teléfono estaba al otro lado de un gran patio detrás del motel.</p>
+
+        <p>Haldeman no sabía que unos trabajadores habían puesto alquitrán fresco en ese patio el día anterior. Como hacía mucho calor (más de 115°F), el alquitrán no se endureció. Era como un líquido bajo una fina capa de arena. Cuando el teléfono sonó a las 3:00 PM, Haldeman corrió por el patio sin zapatos y se quedó atrapado en el alquitrán.</p>
+
+        <p>La policía dijo que fue una situación triste. Hyatt llamó cuatro veces en total. Durante las primeras tres llamadas, Haldeman aún estaba vivo pero no podía llegar al teléfono. Para la cuarta llamada, ya había muerto por el calor extremo. Mientras tanto, el restaurante no se quemó porque José estaba enfermo y no fue a trabajar ese día.</p>
+
+        <p>El plan de Haldeman usaba registros de dinero falsos guardados por Hyatt. La policía dice que Hyatt no sabía nada del crimen. Hyatt "nunca sospechó nada" porque creyó la información falsa que Haldeman le dio.</p>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="hero-sidebar" id="cast-section">
+
+      <div class="role-badge"><span class="icon">🎭</span> Rol: Explorador del Elenco</div>
+
+      <div class="sidebar-box">
+        <h3>Personajes en este Caso</h3>
+
+        <div class="cast-item">
+          <div class="cast-name"><span class="cast-tag">Protagonista</span>Haldeman</div>
+          <p>48 años. El dueño de un restaurante. Tiene muchos problemas financieros y está divorciado.</p>
+        </div>
+
+        <div class="cast-item">
+          <div class="cast-name"><span class="cast-tag">Gerente</span>Larry Hyatt</div>
+          <p>Gerente de negocios de Haldeman. Haldeman lo usa para crear su coartada.</p>
+        </div>
+
+        <div class="cast-item">
+          <div class="cast-name"><span class="cast-tag">Chef</span>José</div>
+          <p>Trabajador mexicano del restaurante. Es el chef. El plan de Haldeman depende de que él encienda la estufa.</p>
+        </div>
+
+        <div class="cast-item">
+          <div class="cast-name"><span class="cast-tag">Testigo</span>Ricky</div>
+          <p>Gerente del motel. Personaje no importante.</p>
+        </div>
+      </div>
+
+      <div class="sidebar-box">
+        <h3>Ubicaciones Clave</h3>
+        <ul>
+          <li><strong>Restaurante de Haldeman</strong> — Un restaurante grande ubicado en una esquina en LA. Haldeman dejó las llaves del gas abiertas para explotar el lugar.</li>
+          <li><strong>El Ranchero Motel</strong> — Un viejo edificio de madera ubicado en Palm Springs. Tiene un patio. Haldeman se queda aquí para crear su coartada.</li>
+        </ul>
+      </div>
+
+      <div class="sidebar-box">
+        <h3>Temperatura en el Día del Récord</h3>
+        <p style="font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:var(--red);line-height:1;">115°F <span style="font-size:14px;color:#888;font-family:'Source Sans 3',sans-serif;font-weight:400;">(46°C)</span></p>
+        <p>Palm Springs, agosto de 1990. El viejo Ricky advirtió: <em>"Solo espera hasta después del almuerzo... hará mucho calor."</em></p>
+      </div>
+
+    </aside>
+  </section>
+
+  <!-- ══════ STORY BUILDER MAP ══════ -->
+  <div class="section-divider" id="story-map">
+    <span>Constructor de Historias — Mapa de la Trama</span>
+  </div>
+
+  <div class="role-badge"><span class="icon">🗺️</span> Rol: Constructor de Historias — Organizador Visual</div>
+
+  <div id="story-map-container">
+    <img src="story_diagram.png" alt="Diagrama de la historia Cooking the Books">
+  </div>
+
+  <!-- ══════ Q&A SECTION ══════ -->
+  <div class="section-divider">
+    <span>Preguntas — Mesa de Investigación</span>
+  </div>
+
+  <div class="role-badge"><span class="icon">❓</span> Rol: Preguntas — 7 Preguntas y Respuestas</div>
+
+  <div id="qa-section">
+    <div class="qa-header">
+      <h2>Dentro del Caso Haldeman: 7 Preguntas Respondidas</h2>
+      <span class="qa-badge">Haz clic para ver las respuestas</span>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" data-n="1">¿Por qué quería Haldeman quemar su restaurante?<span class="qa-toggle">+</span></div>
+      <div class="qa-a">Haldeman no tenía dinero. Su restaurante perdía clientes y tenía muchas deudas por su divorcio y el juego. Quería quemar el restaurante para cobrar el dinero del seguro.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" data-n="2">¿Quién era Larry Hyatt y era un criminal?<span class="qa-toggle">+</span></div>
+      <div class="qa-a">Larry Hyatt era el gerente de negocios. No era un criminal. Él guardaba los registros, pero no sabía que eran falsos. Creía que Haldeman decía la verdad.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" data-n="3">¿Cómo planeó Haldeman empezar el incendio?<span class="qa-toggle">+</span></div>
+      <div class="qa-a">Dañó las tuberías de gas en la cocina. Esperaba que cuando el chef, José, encendiera la estufa, el gas explotara y causara un incendio.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" data-n="4">¿Por qué necesitaba Haldeman una llamada de Hyatt?<span class="qa-toggle">+</span></div>
+      <div class="qa-a">Necesitaba la llamada para probar que estaba en Palm Springs. Si Hyatt lo llamaba al motel, demostraría que Haldeman no estaba en Los Ángeles durante el incendio.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" data-n="5">¿Por qué falló el plan en ambas ciudades?<span class="qa-toggle">+</span></div>
+      <div class="qa-a">En L.A., el chef estaba enfermo y no fue a trabajar, así que no hubo incendio. En Palm Springs, Haldeman se quedó atrapado en alquitrán fresco al intentar contestar el teléfono y murió por el calor.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" data-n="6">¿Por qué es importante el clima caluroso en la historia?<span class="qa-toggle">+</span></div>
+      <div class="qa-a">El calor hizo que el alquitrán fresco fuera líquido. Si no hiciera tanto calor, el alquitrán estaría duro y Haldeman podría caminar sobre él. El calor fue la razón por la que quedó atrapado y murió.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" data-n="7">¿Cuál es la lección principal de la historia?<span class="qa-toggle">+</span></div>
+      <div class="qa-a">La lección es que la codicia y las malas acciones pueden llevar a un final terrible. Haldeman pensó que era más listo que todos, pero su propio plan causó su muerte.</div>
+    </div>
+
+  </div>
+
+  <!-- ══════ WORD DETECTIVE ══════ -->
+  <div class="section-divider">
+    <span>Detective de Palabras — Vocabulario</span>
+  </div>
+
+  <div class="role-badge"><span class="icon">🔍</span> Rol: Detective de Palabras — 8 Palabras Desconocidas</div>
+
+  <div id="word-detective">
+    <div class="wd-header">
+      <h2>Dossier de Vocabulario: Palabras de la Escena</h2>
+      <p>Ocho términos clave identificados en <em>Cooking the Books</em> — definidos y puestos en uso.</p>
+    </div>
+    <div class="wd-grid">
+
+      <div class="wd-card">
+        <div class="wd-word">Ruina financiera</div>
+        <div class="wd-pos">Frase nominal</div>
+        <div class="wd-def">Una situación donde una persona pierde todo su dinero y no puede pagar sus deudas.</div>
+        <div class="wd-example">"Se enfrentaba a la <strong>ruina financiera</strong>" — Haldeman no tenía dinero para pagar su alquiler ni sus deudas.</div>
+      </div>
+
+      <div class="wd-card">
+        <div class="wd-word">Coartada</div>
+        <div class="wd-pos">Sustantivo</div>
+        <div class="wd-def">Prueba de que una persona estaba en un lugar diferente cuando ocurrió un crimen.</div>
+        <div class="wd-example">Haldeman necesitaba la llamada para confirmar su <strong>coartada</strong> — prueba de que estaba en Palm Springs, no en L.A.</div>
+      </div>
+
+      <div class="wd-card">
+        <div class="wd-word">Confiado</div>
+        <div class="wd-pos">Adjetivo</div>
+        <div class="wd-def">Creer que las otras personas son buenas y honestas.</div>
+        <div class="wd-example">Como Hyatt era muy <strong>confiado</strong>, nunca revisó si los registros de dinero eran reales.</div>
+      </div>
+
+      <div class="wd-card">
+        <div class="wd-word">Sospecha</div>
+        <div class="wd-pos">Sustantivo</div>
+        <div class="wd-def">Un sentimiento de que algo está mal o que alguien hizo algo malo.</div>
+        <div class="wd-example">Haldeman hizo registros falsos para que la compañía de seguros no tuviera ninguna <strong>sospecha</strong>.</div>
+      </div>
+
+      <div class="wd-card">
+        <div class="wd-word">Ola de calor</div>
+        <div class="wd-pos">Sustantivo</div>
+        <div class="wd-def">Un periodo de clima muy caluroso que dura muchos días.</div>
+        <div class="wd-example">La <strong>ola de calor</strong> en Palm Springs era muy peligrosa, con temperaturas de más de 115°F.</div>
+      </div>
+
+      <div class="wd-card">
+        <div class="wd-word">Alquitrán</div>
+        <div class="wd-pos">Sustantivo</div>
+        <div class="wd-def">Una sustancia negra, espesa y pegajosa que se usa para hacer caminos o suelos.</div>
+        <div class="wd-example">Haldeman corrió por el patio y se quedó atrapado en el <strong>alquitrán</strong> fresco porque era líquido por el calor.</div>
+      </div>
+
+      <div class="wd-card">
+        <div class="wd-word">Patio</div>
+        <div class="wd-pos">Sustantivo</div>
+        <div class="wd-def">Un área abierta con paredes alrededor, normalmente detrás o dentro de un edificio.</div>
+        <div class="wd-example">El <strong>patio</strong> detrás del motel fue el lugar donde Haldeman quedó atrapado.</div>
+      </div>
+
+      <div class="wd-card">
+        <div class="wd-word">Consciente</div>
+        <div class="wd-pos">Adjetivo</div>
+        <div class="wd-def">Despierto y capaz de ver, oír y pensar.</div>
+        <div class="wd-example">Cuando el teléfono sonó otra vez, Haldeman aún estaba vivo pero no <strong>consciente</strong>.</div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<footer>
+  <strong>The Palm Springs Times</strong><br>
+  <span>© 1990 The Palm Springs Times Company. Todos los derechos reservados. &nbsp;·&nbsp; 
+  Actividad de Círculo de Literatura — Basada en <em>Cooking the Books</em> de Christopher Fowler &nbsp;·&nbsp; 
+  Roles completados: Constructor de Historias · Explorador del Elenco · Creador de Preguntas · Detective de Palabras</span>
+</footer>
+
+<script>
+  // Q&A accordion
+  document.querySelectorAll('.qa-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const isOpen = q.classList.contains('open');
+      document.querySelectorAll('.qa-q').forEach(x => { x.classList.remove('open'); });
+      document.querySelectorAll('.qa-a').forEach(x => { x.classList.remove('open'); });
+      if (!isOpen) {
+        q.classList.add('open');
+        q.nextElementSibling.classList.add('open');
+      }
+    });
+  });
+</script>
+</body>
+</html>
