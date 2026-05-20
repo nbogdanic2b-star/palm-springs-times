@@ -17,9 +17,7 @@
     --col-width: 720px;
   }
 
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 
   body {
     background: var(--paper);
@@ -28,7 +26,6 @@
     font-size: 15px;
     line-height: 1.65;
   }
-
 
   /* ── TOP BAR ── */
   .topbar {
@@ -44,7 +41,6 @@
     align-items: center;
   }
   .topbar strong { color: #fff; }
-
 
   /* ── MASTHEAD ── */
   .masthead {
@@ -71,3 +67,740 @@
     text-transform: uppercase;
   }
   .masthead-sub {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-top: 6px;
+  }
+  .masthead-rule {
+    height: 1px;
+    background: var(--rule);
+    margin: 12px 0 0;
+  }
+
+  /* ── BREAKING BAND ── */
+  .breaking {
+    background: var(--red);
+    color: #fff;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 7px 32px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .breaking-label {
+    background: #fff;
+    color: var(--red);
+    padding: 2px 8px;
+    font-size: 10px;
+    white-space: nowrap;
+  }
+  .breaking-scroll {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  /* ── NAV TABS ── */
+  .navtabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--rule);
+    padding: 0 24px;
+    background: var(--cream);
+    overflow-x: auto;
+    flex-wrap: wrap;
+  }
+  .navtabs a {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--rule);
+    text-decoration: none;
+    padding: 10px 16px;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: border-color .2s, color .2s;
+  }
+  .navtabs a:hover, .navtabs a.active { border-bottom-color: var(--red); color: var(--red); }
+
+  /* ── LAYOUT ── */
+  .page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 0;
+    border-bottom: 2px solid var(--rule);
+    padding: 28px 0 24px;
+  }
+  .hero-main { padding-right: 28px; border-right: 1px solid #bbb; }
+  .hero-sidebar { padding-left: 24px; }
+
+  .section-label {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--red); opacity: .4; }
+
+  .hero-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 3.5vw, 44px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    color: var(--rule);
+  }
+  .hero-deck {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+  .hero-byline {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 11px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 16px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 5px 0;
+  }
+  .hero-byline strong { color: var(--rule); }
+
+  /* Fake fire photo */
+  .photo-block {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: linear-gradient(160deg,#1a0a00 0%,#5c1a00 30%,#c44000 60%,#ff8c00 80%,#ffd27a 100%);
+    position: relative;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+  .photo-block::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 60% 80%, rgba(255,140,0,.45) 0%, transparent 70%),
+                radial-gradient(ellipse at 30% 60%, rgba(200,60,0,.3) 0%, transparent 60%);
+    animation: flicker 2.5s infinite alternate;
+  }
+  @keyframes flicker {
+    0% { opacity: .8; }
+    50% { opacity: 1; }
+    100% { opacity: .7; }
+  }
+  .photo-caption {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 11px;
+    color: var(--mid);
+    font-style: italic;
+    margin-bottom: 16px;
+  }
+  .photo-caption strong { font-style: normal; font-weight: 700; color: var(--rule); }
+
+  .article-body p {
+    margin-bottom: 14px;
+    text-align: justify;
+    hyphens: auto;
+    font-size: 14.5px;
+    color: #1a1a1a;
+  }
+  .article-body p:first-child::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    font-weight: 900;
+    float: left;
+    line-height: .75;
+    margin: 4px 8px 0 0;
+    color: var(--rule);
+  }
+
+  /* pull quote */
+  .pull-quote {
+    border-left: 4px solid var(--red);
+    padding: 8px 16px;
+    margin: 18px 0;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--rule);
+    line-height: 1.4;
+  }
+  .pull-quote cite {
+    display: block;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 10px;
+    font-style: normal;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-top: 6px;
+  }
+
+  /* Sidebar boxes */
+  .sidebar-box {
+    border: 1px solid #bbb;
+    background: var(--cream);
+    padding: 14px;
+    margin-bottom: 18px;
+  }
+  .sidebar-box h3 {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #ccc;
+  }
+  .sidebar-box p { font-size: 13px; margin-bottom: 8px; color: #333; }
+  .sidebar-box ul { padding-left: 16px; }
+  .sidebar-box li { font-size: 13px; margin-bottom: 6px; color: #333; }
+
+  /* Cast tag */
+  .cast-tag {
+    display: inline-block;
+    background: var(--rule);
+    color: #fff;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+  .cast-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+  .cast-item { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px dotted #bbb; }
+  .cast-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  /* ── SECTION DIVIDERS ── */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 32px 0 20px;
+  }
+  .section-divider span {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    font-style: italic;
+    white-space: nowrap;
+    color: var(--rule);
+  }
+  .section-divider::before, .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: var(--rule);
+  }
+
+  /* ── STORY MAP (Story Builder) ── */
+  #story-map-container {
+    background: var(--cream);
+    border: 1px solid #bbb;
+    padding: 24px;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  #story-map-container img {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid var(--rule);
+  }
+
+  /* ── Q&A (Questions Maker) ── */
+  #qa-section {
+    border: 1px solid #bbb;
+    background: #fff;
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+  .qa-header {
+    background: var(--rule);
+    color: #fff;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .qa-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 700;
+  }
+  .qa-badge {
+    background: var(--red);
+    color: #fff;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+  }
+  .qa-item {
+    border-bottom: 1px solid #e0dbd0;
+    padding: 0;
+    overflow: hidden;
+    transition: background .2s;
+  }
+  .qa-item:last-child { border-bottom: none; }
+  .qa-q {
+    background: var(--cream);
+    padding: 14px 20px 14px 54px;
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--rule);
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .qa-q::before {
+    content: attr(data-n);
+    position: absolute;
+    left: 16px;
+    top: 14px;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--red);
+    width: 28px;
+    text-align: center;
+  }
+  .qa-toggle {
+    font-size: 18px;
+    color: var(--red);
+    flex-shrink: 0;
+    transition: transform .25s;
+    font-family: monospace;
+  }
+  .qa-q.open .qa-toggle { transform: rotate(45deg); }
+  .qa-a {
+    display: none;
+    padding: 12px 20px 14px 54px;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.6;
+    background: #fff;
+    border-left: 4px solid var(--gold);
+  }
+  .qa-a.open { display: block; }
+
+  #word-detective {
+    border: 1px solid #bbb;
+    margin-bottom: 40px;
+    overflow: hidden;
+  }
+  .wd-header {
+    background: var(--red);
+    color: #fff;
+    padding: 14px 20px;
+  }
+  .wd-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 700;
+  }
+  .wd-header p {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 12px;
+    opacity: .85;
+    margin-top: 2px;
+  }
+  .wd-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 0;
+  }
+  .wd-card {
+    padding: 16px;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+  }
+  .wd-card:nth-child(even) { background: var(--cream); }
+  .wd-word {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--rule);
+    margin-bottom: 2px;
+  }
+  .wd-pos {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .wd-def {
+    font-size: 13px;
+    color: #444;
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+  .wd-example {
+    font-size: 12px;
+    color: var(--mid);
+    font-style: italic;
+    border-left: 3px solid var(--gold);
+    padding-left: 8px;
+    line-height: 1.4;
+  }
+  .wd-example strong { font-style: normal; color: var(--rule); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 3px double var(--rule);
+    padding: 20px 32px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--mid);
+    letter-spacing: .06em;
+  }
+  footer strong { color: var(--rule); font-family: 'Playfair Display', serif; font-size: 16px; letter-spacing: 0; }
+
+  /* ── ROLE BADGES ── */
+  .role-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--rule);
+    color: #fff;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    margin-bottom: 16px;
+  }
+  .role-badge .icon { font-size: 14px; }
+
+  @media (max-width: 700px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-main { padding-right: 0; border-right: none; border-bottom: 1px solid #bbb; padding-bottom: 20px; margin-bottom: 20px; }
+    .hero-sidebar { padding-left: 0; }
+    .topbar { font-size: 9px; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span><strong>Tuesday, August 14, 1990</strong> — Palm Springs, California</span>
+  <span>Vol. XLVII &nbsp;·&nbsp; No. 226 &nbsp;·&nbsp; Local Edition</span>
+  <span>Weather: <strong>112°F</strong> — Extreme heat advisory</span>
+</div>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-kicker">Est. 1943 &nbsp;·&nbsp; Serving the Coachella Valley</div>
+  <h1>The Palm Springs Times</h1>
+  <div class="masthead-sub">Independent · Fearless · Thorough &nbsp;⬥&nbsp; 25 cents</div>
+  <div class="masthead-rule"></div>
+</div>
+
+<!-- BREAKING BAND -->
+<div class="breaking">
+  <span class="breaking-label">⚑ Breaking</span>
+  <span class="breaking-scroll">Restaurant owner found dead at local motel &nbsp;·&nbsp; Police investigating possible arson plot &nbsp;·&nbsp; Ranchero Motel courtyard sealed off &nbsp;·&nbsp; No charges filed yet against employees</span>
+</div>
+
+<!-- NAV -->
+<nav class="navtabs">
+  <a href="#main-story" class="active">Front Page</a>
+  <a href="#cast-section">Characters & Setting</a>
+  <a href="#story-map">Story Map</a>
+  <a href="#qa-section">Investigation Q&A</a>
+  <a href="#word-detective">Word Detective</a>
+  <a href="es.html" style="background:var(--red);color:#fff;margin-left:auto;">Leer en Español</a>
+</nav>
+
+<div class="page">
+
+  <!-- ══════ HERO ══════ -->
+  <section class="hero" id="main-story">
+
+    <div class="hero-main">
+      <div class="section-label">Crime &amp; Courts</div>
+      <h2 class="hero-headline">L.A. Restaurant Owner Dies in Record Heat as<br>Insurance Fraud Plan Fails</h2>
+      <p class="hero-deck">Haldeman, 48, owner of "Haldeman's" in Los Angeles, was found dead at the Ranchero Motel. He got trapped in fresh tar while waiting for a phone call to prove he was not at his restaurant during a fire.</p>
+      <div class="hero-byline">
+        By <strong>Mary K. Calloway</strong>, Crime Correspondent &nbsp;|&nbsp; Published August 14, 1990, 6:00 AM &nbsp;|&nbsp; 
+        <em>Reporting contributed by the Palm Springs Police Dept.</em>
+      </div>
+
+      <div class="photo-block" style="background: url('illustration.png') center/cover no-repeat; border: 1px solid var(--rule);"></div>
+      <p class="photo-caption"><strong>Illustration:</strong> "The ground did not feel solid under his feet." Haldeman's fatal walk across the Ranchero Motel courtyard. — <em>PST Staff</em></p>
+
+      <div class="article-body">
+        <p>Palm Springs: The owner of a local Restaurant died Sunday. He went there to make up an Alibi, while his restaurant burned down. The police say it was a very bad plan that went wrong. “Haldeman thought his plan to get insurance money was perfect,but everything went  wrong…..”</p>
+
+        <p>Police said that at Friday night Haldeman drove to the Ranchero Motel. When his chef, José, accidentally started a fire,he wanted to be far away from L.A.. Haldeman broke the cooker himself. He wanted thath the fire would burn down the restaurant,and thath he would get money from the insurance company. He told everybody that his buisness was doing great and earning a lot of money, but this was false.</p>
+
+        <div class="pull-quote">
+          "He was very careful with the guest book. He wrote the date very clearly. I thought it was strange."
+          <cite>— RICKY, MANAGER OF THE RANCHERO MOTEL</cite>
+        </div>
+
+        <p>The plan began to go wrong when Haldeman noticed that the motel rooms didn’t had phones. This was a big problem,because he needed to get a phone call from his manayer,Larry Hyatt,to prove he was there. The only phone in the whole motel was across a big courtyard.</p>
+
+        <p>Haldeman didn’t know that workers had worked on the ground with fresh liquid tar in the courtyard the day before. The tar did not dry because this day it was so hot (over 115 degrees). It was all liquid under a thin layer of sand. Haldeman runed barefoot trought the courtyard and stepped into the tar when the phone rang at 3:00 p.m..</p>
+
+        <p>“It was a sad situation,” police said. Hyatt called 4 times. On the first 3 calls, Haldemad was alive but was trapped. On the fourth call, he couldnt stand the terrible heat any longer. Meanwhile, José was sick and didnt go to work that day so the restaurant didnt burn down.</p>
+
+        <p>Haldeman’s plan was based on the cook of the books kept by Hyatt. Hyatt didn’t knew about the crime. Police say thet Hyatt "never suspected anything", because he belived in the false information that Haldeman told him.</p>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="hero-sidebar" id="cast-section">
+
+      <div class="role-badge"><span class="icon">🎭</span> Role: Cast Explorer</div>
+
+      <div class="sidebar-box">
+        <h3>Characters in This Case</h3>
+
+        <div class="cast-item">
+          <div class="cast-name"><span class="cast-tag">Protagonist</span>Haldeman</div>
+          <p>48 years old. The owner of a restaurant. He has many financial problems and is divorced.</p>
+        </div>
+
+        <div class="cast-item">
+          <div class="cast-name"><span class="cast-tag">Manager</span>Larry Hyatt</div>
+          <p>Haldeman's business manager. Haldeman uses him to create his alibi.</p>
+        </div>
+
+        <div class="cast-item">
+          <div class="cast-name"><span class="cast-tag">Chef</span>José</div>
+          <p>Mexican worker of the restaurant. He's the chef. The Haldeman's plan depends on him lighting the stove.</p>
+        </div>
+
+        <div class="cast-item">
+          <div class="cast-name"><span class="cast-tag">Witness</span>Ricky</div>
+          <p>Manager of the motel. Not important character.</p>
+        </div>
+      </div>
+
+      <div class="sidebar-box">
+        <h3>Key Locations</h3>
+        <ul>
+          <li><strong>Haldeman's Restaurant</strong> — A big restaurant located on a corner in LA. Haldeman left the gas taps open to explode the place.</li>
+          <li><strong>The Ranchero Motel</strong> — An old wooden building located in Palm Springs. It has a courtyard. Haldeman stays here to create his alibi.</li>
+        </ul>
+      </div>
+
+      <div class="sidebar-box">
+        <h3>Temperature on Record Day</h3>
+        <p style="font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:var(--red);line-height:1;">115°F <span style="font-size:14px;color:#888;font-family:'Source Sans 3',sans-serif;font-weight:400;">(46°C)</span></p>
+        <p>Palm Springs, August 1990. Old Ricky warned: <em>"Just wait until after lunch… it will be very hot."</em></p>
+      </div>
+
+    </aside>
+  </section>
+
+  <!-- ══════ STORY BUILDER MAP ══════ -->
+  <div class="section-divider" id="story-map">
+    <span>Story Builder — Plot Map</span>
+  </div>
+
+  <div class="role-badge"><span class="icon">🗺️</span> Role: Story Builder — Visual Organizer</div>
+
+  <div id="story-map-container">
+    <img src="story_diagram.png" alt="Cooking the Books Story Diagram">
+  </div>
+
+  <!-- ══════ Q&A SECTION ══════ -->
+  <div class="section-divider">
+    <span>Questions — Investigation Desk</span>
+  </div>
+
+  <div class="role-badge"><span class="icon">❓</span> Role: Questions — 7 Questions & Answers</div>
+
+  <div id="qa-section">
+    <div class="qa-header">
+      <h2>Inside the Haldeman Case: 7 Questions Answered</h2>
+      <span class="qa-badge">Click to reveal answers</span>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" data-n="1">Why did Haldeman want to burn his restaurant?<span class="qa-toggle">+</span></div>
+      <div class="qa-a">Haldeman had no money. His restaurant was losing customers, and he had many debts from his divorce and gambling. He wanted to burn the restaurant to get money from the insurance company.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" data-n="2">Who was Larry Hyatt and was he a criminal?<span class="qa-toggle">+</span></div>
+      <div class="qa-a">Larry Hyatt was the business manager. He was not a criminal. He kept the records, but he did not know they were fake. He believed Haldeman was telling the truth.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" data-n="3">How did Haldeman plan to start the fire?<span class="qa-toggle">+</span></div>
+      <div class="qa-a">He damaged the gas pipes in the kitchen. He hoped that when the chef, Jose, turned on the stove, the gas would explode and start a fire.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" data-n="4">Why did Haldeman need a phone call from Hyatt?<span class="qa-toggle">+</span></div>
+      <div class="qa-a">He needed the call to prove he was in Palm Springs. If Hyatt called him at the motel, it would show that Haldeman was not in Los Angeles during the fire.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" data-n="5">Why did the plan fail in both cities?<span class="qa-toggle">+</span></div>
+      <div class="qa-a">In L.A., the chef was sick and did not go to work, so there was no fire. In Palm Springs, Haldeman got stuck in fresh tar while trying to answer the phone and died from the heat.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" data-n="6">Why is the hot weather important in the story?<span class="qa-toggle">+</span></div>
+      <div class="qa-a">The heat made the fresh tar liquid. If it was not so hot, the tar would be hard, and Haldeman could walk on it. The heat was the reason he got trapped and died.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" data-n="7">What is the main lesson of the story?<span class="qa-toggle">+</span></div>
+      <div class="qa-a">The lesson is that greed and bad actions can lead to a terrible end. Haldeman thought he was smarter than everyone else, but his own plan caused his death.</div>
+    </div>
+
+  </div>
+
+  <!-- ══════ WORD DETECTIVE ══════ -->
+  <div class="section-divider">
+    <span>Word Detective — Vocabulary</span>
+  </div>
+
+  <div class="role-badge"><span class="icon">🔍</span> Role: Word Detective — 8 Unknown Words</div>
+
+  <div id="word-detective">
+    <div class="wd-header">
+      <h2>Vocabulary Dossier: Words from the Scene</h2>
+      <p>Eight key terms identified in <em>Cooking the Books</em> — defined and put to use.</p>
+    </div>
+    <div class="wd-grid">
+
+      <div class="wd-card">
+        <div class="wd-word">Financial ruin</div>
+        <div class="wd-pos">Noun phrase</div>
+        <div class="wd-def">A situation where a person loses all their money and cannot pay their debts.</div>
+        <div class="wd-example">"He was facing <strong>financial ruin</strong>" — Haldeman had no money to pay his rent or his debts.</div>
+      </div>
+
+      <div class="wd-card">
+        <div class="wd-word">Alibi</div>
+        <div class="wd-pos">Noun</div>
+        <div class="wd-def">Proof that a person was in a different place when a crime happened.</div>
+        <div class="wd-example">Haldeman needed the phone call to confirm his <strong>alibi</strong> — proof he was in Palm Springs, not L.A.</div>
+      </div>
+
+      <div class="wd-card">
+        <div class="wd-word">Trusting</div>
+        <div class="wd-pos">Adjective</div>
+        <div class="wd-def">Believing that other people are good and honest.</div>
+        <div class="wd-example">Because Hyatt was very <strong>trusting</strong>, he never checked if the money records were real.</div>
+      </div>
+
+      <div class="wd-card">
+        <div class="wd-word">Suspicion</div>
+        <div class="wd-pos">Noun</div>
+        <div class="wd-def">A feeling that something is wrong or that someone did something bad.</div>
+        <div class="wd-example">Haldeman made false records so the insurance company wouldn't have any <strong>suspicion</strong>.</div>
+      </div>
+
+      <div class="wd-card">
+        <div class="wd-word">Heatwave</div>
+        <div class="wd-pos">Noun</div>
+        <div class="wd-def">A period of very hot weather that lasts for many days.</div>
+        <div class="wd-example">The <strong>heatwave</strong> in Palm Springs was very dangerous, with temperatures over 115°F.</div>
+      </div>
+
+      <div class="wd-card">
+        <div class="wd-word">Tar</div>
+        <div class="wd-pos">Noun</div>
+        <div class="wd-def">A black, thick, sticky substance used for making roads or floors.</div>
+        <div class="wd-example">Haldeman ran through the courtyard and got stuck in the fresh <strong>tar</strong> because it was liquid from the heat.</div>
+      </div>
+
+      <div class="wd-card">
+        <div class="wd-word">Courtyard</div>
+        <div class="wd-pos">Noun</div>
+        <div class="wd-def">An open area with walls around it, usually behind or inside a building.</div>
+        <div class="wd-example">The <strong>courtyard</strong> behind the motel was the place where Haldeman got trapped.</div>
+      </div>
+
+      <div class="wd-card">
+        <div class="wd-word">Conscious</div>
+        <div class="wd-pos">Adjective</div>
+        <div class="wd-def">Awake and able to see, hear, and think.</div>
+        <div class="wd-example">When the phone rang again, Haldeman was still alive but not <strong>conscious</strong>.</div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<footer>
+  <strong>The Palm Springs Times</strong><br>
+  <span>© 1990 The Palm Springs Times Company. All rights reserved. &nbsp;·&nbsp; 
+  Literature Circle Activity — Based on <em>Cooking the Books</em> by Christopher Fowler &nbsp;·&nbsp; 
+  Roles completed: Story Builder · Cast Explorer · Question Maker · Word Detective</span>
+</footer>
+
+<script>
+  // Q&A accordion
+  document.querySelectorAll('.qa-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const isOpen = q.classList.contains('open');
+      document.querySelectorAll('.qa-q').forEach(x => { x.classList.remove('open'); });
+      document.querySelectorAll('.qa-a').forEach(x => { x.classList.remove('open'); });
+      if (!isOpen) {
+        q.classList.add('open');
+        q.nextElementSibling.classList.add('open');
+      }
+    });
+  });
+</script>
+</body>
+</html>
